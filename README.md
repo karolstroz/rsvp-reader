@@ -21,6 +21,28 @@ npm test           # unit tests for the reading engine
 npm run typecheck  # tsc --noEmit
 ```
 
+## Deploying
+
+The app lives in a subdirectory of a documentation repository, so a deploy has to
+be pointed at `rsvp-reader/` rather than the repository root — importing the root
+builds the Mintlify docs site instead and fails.
+
+**Vercel via Git:** import the repository, then set **Root Directory** to
+`rsvp-reader` on the import screen. Next.js is auto-detected; no environment
+variables are required.
+
+**Vercel from a terminal:**
+
+```bash
+cd rsvp-reader
+npx vercel        # preview
+npx vercel --prod # production
+```
+
+`/api/extract` is the only server-side code and runs on the Node runtime (it needs
+`jsdom`, which cannot run on the edge). Everything else is static or client-side, so
+the rest of the app works from the CDN.
+
 ## How it works
 
 ### ORP — `src/lib/orp.ts`
