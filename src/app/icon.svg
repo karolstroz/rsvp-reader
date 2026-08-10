@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="RSVP Reader">
+  <rect width="512" height="512" rx="112" fill="#0b0d10"/>
+  <text x="256" y="316" font-family="Inter, system-ui, sans-serif" font-size="200" font-weight="700" text-anchor="middle" fill="#e8eaed">R<tspan fill="#ff4d4d">S</tspan>V</text>
+</svg>

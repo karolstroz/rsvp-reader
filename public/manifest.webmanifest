@@ -1,0 +1,18 @@
+{
+  "name": "RSVP Reader",
+  "short_name": "RSVP",
+  "description": "Speed reading with Rapid Serial Visual Presentation and ORP highlighting.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0d10",
+  "theme_color": "#0b0d10",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

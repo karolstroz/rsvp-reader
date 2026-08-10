@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+
+/*
+ * Themes are plain CSS custom properties switched by a `data-theme` attribute
+ * on <html>. That keeps every theme a pure token swap — no per-theme utility
+ * classes scattered through components — and lets the reader surface stay a
+ * single `bg-surface` no matter which of the four themes is active.
+ */
+
+:root,
+[data-theme='dark'] {
+  --bg: #0b0d10;
+  --surface: #14171c;
+  --surface-raised: #1c2027;
+  --border: #2a2f38;
+  --text: #e8eaed;
+  --text-muted: #9aa2ad;
+  --accent: #ff4d4d;
+  --accent-soft: #ff8080;
+  --focus: #4d9fff;
+}
+
+[data-theme='light'] {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface-raised: #f0f2f5;
+  --border: #dfe3e8;
+  --text: #16191d;
+  --text-muted: #5f6773;
+  --accent: #d92020;
+  --accent-soft: #e56060;
+  --focus: #1a73e8;
+}
+
+[data-theme='sepia'] {
+  --bg: #f2e8d5;
+  --surface: #faf3e4;
+  --surface-raised: #f0e4cc;
+  --border: #ddceb0;
+  --text: #3b3227;
+  --text-muted: #7a6a54;
+  --accent: #b3541e;
+  --accent-soft: #cf7a4a;
+  --focus: #8a6d3b;
+}
+
+[data-theme='contrast'] {
+  --bg: #000000;
+  --surface: #000000;
+  --surface-raised: #101010;
+  --border: #ffffff;
+  --text: #ffffff;
+  --text-muted: #d0d0d0;
+  --accent: #ffe600;
+  --accent-soft: #fff480;
+  --focus: #00e5ff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-line: var(--border);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-focus: var(--focus);
+
+  --font-reader-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-reader-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, ui-serif, serif;
+  --font-reader-mono: ui-monospace, 'SF Mono', 'Roboto Mono', 'JetBrains Mono', Menlo, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+[data-theme='light'],
+[data-theme='sepia'] {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  /* The reader is a fixed-viewport app; the page itself never scrolls. */
+  overscroll-behavior-y: none;
+}
+
+/* Reader font families, selected from settings. */
+.font-reader-sans {
+  font-family: var(--font-reader-sans);
+}
+.font-reader-serif {
+  font-family: var(--font-reader-serif);
+}
+.font-reader-mono {
+  font-family: var(--font-reader-mono);
+}
+
+/*
+ * Range inputs: styled by hand so the WPM slider and the scrubber look the same
+ * in every theme and stay big enough to drag with a thumb.
+ */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+input[type='range']::-moz-range-track {
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: -0.4375rem;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 2px solid var(--surface);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--surface);
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+input[type='range']:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
