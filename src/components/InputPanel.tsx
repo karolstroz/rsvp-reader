@@ -211,7 +211,7 @@ function PasteTab({ busy, onSubmit }: { busy: boolean; onSubmit: (text: string) 
         <button
           type="submit"
           disabled={busy || words === 0}
-          className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-on-accent disabled:opacity-40"
         >
           {busy ? 'Loading…' : 'Start reading'}
         </button>
@@ -247,7 +247,7 @@ function UrlTab({ busy, onSubmit }: { busy: boolean; onSubmit: (url: string) => 
         <button
           type="submit"
           disabled={busy || !url.trim()}
-          className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-on-accent disabled:opacity-40"
         >
           {busy ? 'Extracting…' : 'Extract'}
         </button>

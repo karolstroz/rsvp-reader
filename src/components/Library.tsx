@@ -3,6 +3,7 @@
 import { useReaderStore } from '@/store/useReaderStore';
 import { formatDuration } from '@/lib/pacing';
 import { TrashIcon } from './icons';
+import { HexMark } from './HexMark';
 import type { SourceKind } from '@/types';
 
 const SOURCE_LABEL: Record<SourceKind, string> = {
@@ -22,9 +23,13 @@ export function Library() {
 
   if (library.length === 0) {
     return (
-      <p className="rounded-2xl border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
-        Nothing here yet. Anything you read is saved on this device, along with where you stopped.
-      </p>
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line px-4 py-10 text-center">
+        <HexMark className="h-8 w-8 opacity-60" />
+        <p className="max-w-sm text-sm text-muted">
+          Nothing here yet. Anything you read is saved on this device, along with where you
+          stopped.
+        </p>
+      </div>
     );
   }
 

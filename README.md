@@ -21,6 +21,47 @@ npm test           # unit tests for the reading engine
 npm run typecheck  # tsc --noEmit
 ```
 
+## Design system
+
+Honey against graphite. The bee in the name is carried by colour and geometry —
+amber accents, warm-neutral greys, hexagonal texture — not by illustration. There
+are no stripes and no mascot.
+
+Every theme is a pure swap of CSS custom properties on `<html>[data-theme]`, so no
+component carries a per-theme class:
+
+| Token | Role |
+| ----- | ---- |
+| `--bg` `--surface` `--surface-raised` | warm-neutral greys, never blue-black |
+| `--accent` | the ORP letter, primary buttons, slider thumbs |
+| `--on-accent` | text sitting *on* the accent |
+| `--focus` | focus ring, deliberately cool so it reads as a different signal |
+
+`--on-accent` earns its place. The accent is a mid-tone amber in the dark themes and
+a dark ochre in the light ones, so text on top of it has to flip with it — hardcoding
+white leaves the primary buttons at roughly 2:1 against honey.
+
+Measured contrast of button text on the accent, taken from the rendered page rather
+than from the source values:
+
+| Theme | Accent | Button text | Body text |
+| ----- | ------ | ----------- | --------- |
+| Dark | `#f5a524` | 9.13:1 | 15.99:1 |
+| Light | `#995f00` | 5.26:1 | 15.83:1 |
+| Sepia | `#9a5b12` | 4.90:1 | 10.34:1 |
+| High contrast | `#ffe600` | 16.57:1 | 21:1 |
+
+All four clear WCAG AA. High contrast turns out to be the most literal bee theme —
+pure yellow on pure black — which is convenient, since that is also the most legible
+pairing on offer.
+
+Two components carry the motif. `Honeycomb` is a tiling of regular hexagons stroked
+in `currentColor` at 7% opacity, masked to fade downwards, used behind the home
+masthead only. `HexMark` is the logo: a hexagon cell holding a single amber dot —
+the fixation point every word aligns to, so the mark states the product's premise.
+
+The reading surface itself gets none of it. Nothing may compete with the word.
+
 ## Deploying
 
 **Vercel via Git:** import this repository. Next.js is auto-detected, the defaults

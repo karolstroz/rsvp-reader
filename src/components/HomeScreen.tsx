@@ -6,6 +6,8 @@ import { InputPanel } from './InputPanel';
 import { Library } from './Library';
 import { ReaderView } from './ReaderView';
 import { SettingsPanel } from './SettingsPanel';
+import { Honeycomb } from './Honeycomb';
+import { HexMark } from './HexMark';
 import { SettingsIcon } from './icons';
 
 /**
@@ -34,16 +36,24 @@ export function HomeScreen() {
   if (isReaderOpen && hasDocument) return <ReaderView />;
 
   return (
-    <div className="min-h-dvh bg-bg">
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
+    <div className="relative min-h-dvh bg-bg">
+      {/* Texture behind the masthead only; it fades out before the content. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-64 overflow-hidden text-accent">
+        <Honeycomb />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-4 py-8 sm:py-12">
         <header className="mb-8 flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              Blitzbee
-            </h1>
-            <p className="mt-1 text-sm text-muted">
-              One word at a time, anchored on its optimal recognition point.
-            </p>
+          <div className="flex items-center gap-3">
+            <HexMark />
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                Blitzbee
+              </h1>
+              <p className="mt-1 text-sm text-muted">
+                One word at a time, anchored on its optimal recognition point.
+              </p>
+            </div>
           </div>
 
           <button

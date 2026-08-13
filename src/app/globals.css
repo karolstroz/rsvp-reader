@@ -1,58 +1,77 @@
 @import 'tailwindcss';
 
 /*
+ * Blitzbee's palette: honey against graphite.
+ *
+ * The bee reference is carried by colour and geometry — warm amber accents,
+ * warm-neutral greys, hexagonal texture — rather than by illustration. No
+ * stripes, no mascot.
+ *
  * Themes are plain CSS custom properties switched by a `data-theme` attribute
- * on <html>. That keeps every theme a pure token swap — no per-theme utility
- * classes scattered through components — and lets the reader surface stay a
- * single `bg-surface` no matter which of the four themes is active.
+ * on <html>, so every theme is a pure token swap and components never carry
+ * per-theme classes.
+ *
+ * `--on-accent` is not decorative: the accent is a mid-tone amber in the dark
+ * themes and a dark ochre in the light ones, so text sitting *on* the accent
+ * has to flip with it. Hardcoding white would leave the primary buttons at
+ * roughly 2:1 against honey.
  */
 
 :root,
 [data-theme='dark'] {
-  --bg: #0b0d10;
-  --surface: #14171c;
-  --surface-raised: #1c2027;
-  --border: #2a2f38;
-  --text: #e8eaed;
-  --text-muted: #9aa2ad;
-  --accent: #ff4d4d;
-  --accent-soft: #ff8080;
-  --focus: #4d9fff;
+  --bg: #0d0c0a;
+  --surface: #17150f;
+  --surface-raised: #211e17;
+  --border: #302c22;
+  --text: #ece8df;
+  --text-muted: #a09a8a;
+  --accent: #f5a524;
+  --accent-soft: #ffc35c;
+  --on-accent: #17120a;
+  --focus: #5aa9ff;
 }
 
 [data-theme='light'] {
-  --bg: #f5f6f8;
+  --bg: #f7f4ed;
   --surface: #ffffff;
-  --surface-raised: #f0f2f5;
-  --border: #dfe3e8;
-  --text: #16191d;
-  --text-muted: #5f6773;
-  --accent: #d92020;
-  --accent-soft: #e56060;
+  --surface-raised: #f1ece0;
+  --border: #e2dbcb;
+  --text: #1c1a15;
+  --text-muted: #6b6454;
+  --accent: #995f00;
+  --accent-soft: #c07f14;
+  --on-accent: #ffffff;
   --focus: #1a73e8;
 }
 
 [data-theme='sepia'] {
   --bg: #f2e8d5;
   --surface: #faf3e4;
-  --surface-raised: #f0e4cc;
-  --border: #ddceb0;
+  --surface-raised: #efe2c7;
+  --border: #dccdad;
   --text: #3b3227;
   --text-muted: #7a6a54;
-  --accent: #b3541e;
-  --accent-soft: #cf7a4a;
-  --focus: #8a6d3b;
+  --accent: #9a5b12;
+  --accent-soft: #c07f2a;
+  --on-accent: #faf3e4;
+  --focus: #7a5a2a;
 }
 
+/*
+ * High contrast doubles as the most literal bee theme — pure yellow on pure
+ * black — which is convenient, because that pairing is also the most legible
+ * combination available.
+ */
 [data-theme='contrast'] {
   --bg: #000000;
   --surface: #000000;
-  --surface-raised: #101010;
+  --surface-raised: #121212;
   --border: #ffffff;
   --text: #ffffff;
-  --text-muted: #d0d0d0;
+  --text-muted: #d8d8d8;
   --accent: #ffe600;
   --accent-soft: #fff480;
+  --on-accent: #000000;
   --focus: #00e5ff;
 }
 
@@ -65,6 +84,7 @@
   --color-muted: var(--text-muted);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
   --color-focus: var(--focus);
 
   --font-reader-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,

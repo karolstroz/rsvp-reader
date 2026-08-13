@@ -275,7 +275,7 @@ export function ReaderView() {
             <button
               type="button"
               onClick={isPlaying ? pause : play}
-              className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white shadow-lg transition-transform active:scale-95"
+              className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-on-accent shadow-lg transition-transform active:scale-95"
               aria-label={isPlaying ? 'Pause' : 'Play'}
             >
               {isPlaying ? <PauseIcon className="h-7 w-7" /> : <PlayIcon className="h-7 w-7" />}

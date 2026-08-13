@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Blitzbee">
-  <rect width="512" height="512" rx="112" fill="#0b0d10"/>
-  <!-- A lowercase "b" whose bowl is the fixation point: the red dot every word is anchored on. -->
-  <rect x="150" y="104" width="46" height="314" rx="23" fill="#e8eaed"/>
-  <circle cx="266" cy="330" r="88" fill="#ff4d4d"/>
+  <rect width="512" height="512" rx="112" fill="#0d0c0a"/>
+  <!-- A hexagon cell holding the fixation point: the one spot every word aligns to. -->
+  <path d="M256 108 L384 182 L384 330 L256 404 L128 330 L128 182 Z" fill="none" stroke="#302c22" stroke-width="22"/>
+  <circle cx="256" cy="256" r="62" fill="#f5a524"/>
 </svg>
