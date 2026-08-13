@@ -171,7 +171,7 @@ export const useReaderStore = create<ReaderState>()(
       setHydrated: () => set({ hydrated: true }),
     }),
     {
-      name: 'rsvp-reader-settings',
+      name: 'blitzbee-settings',
       storage: createJSONStorage(() => localStorage),
       // Only settings are persisted here. Documents live in IndexedDB, and the
       // reader should always open on the library rather than mid-session.

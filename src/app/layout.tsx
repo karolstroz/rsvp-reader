@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'RSVP Reader — speed reading with ORP',
+  title: 'Blitzbee — speed reading with ORP',
   description:
     'Read pasted text, articles, EPUB and PDF at 100–1000 WPM using Rapid Serial Visual Presentation with Optimal Recognition Point highlighting.',
   manifest: '/manifest.webmanifest',
-  appleWebApp: { capable: true, title: 'RSVP Reader', statusBarStyle: 'black-translucent' },
+  appleWebApp: { capable: true, title: 'Blitzbee', statusBarStyle: 'black-translucent' },
 };
 
 export const viewport: Viewport = {
@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 const themeBootstrap = `
 (function () {
   try {
-    var raw = localStorage.getItem('rsvp-reader-settings');
+    var raw = localStorage.getItem('blitzbee-settings');
     var theme = raw ? (JSON.parse(raw).state || {}).settings?.theme : null;
     document.documentElement.dataset.theme = theme || 'dark';
   } catch (e) {

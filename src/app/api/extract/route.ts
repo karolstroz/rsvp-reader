@@ -21,7 +21,7 @@ const MAX_BYTES = 5 * 1024 * 1024;
 const FETCH_TIMEOUT_MS = 15_000;
 
 const USER_AGENT =
-  'Mozilla/5.0 (compatible; RSVPReader/0.1; +https://github.com/karolstroz/docs)';
+  'Mozilla/5.0 (compatible; Blitzbee/0.1; +https://github.com/karolstroz/blitzbee)';
 
 /**
  * Reject anything that is not a public http(s) URL.

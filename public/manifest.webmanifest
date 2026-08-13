@@ -1,6 +1,6 @@
 {
-  "name": "RSVP Reader",
-  "short_name": "RSVP",
+  "name": "Blitzbee",
+  "short_name": "Blitzbee",
   "description": "Speed reading with Rapid Serial Visual Presentation and ORP highlighting.",
   "start_url": "/",
   "display": "standalone",

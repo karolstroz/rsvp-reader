@@ -13,7 +13,7 @@
 
 import type { DocumentSummary, ReadingDocument } from '@/types';
 
-const DB_NAME = 'rsvp-reader';
+const DB_NAME = 'blitzbee';
 const DB_VERSION = 1;
 const STORE = 'documents';
 const MAX_DOCUMENTS = 50;

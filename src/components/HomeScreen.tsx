@@ -39,7 +39,7 @@ export function HomeScreen() {
         <header className="mb-8 flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              RSVP Reader
+              Blitzbee
             </h1>
             <p className="mt-1 text-sm text-muted">
               One word at a time, anchored on its optimal recognition point.

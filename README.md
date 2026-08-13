@@ -1,4 +1,4 @@
-# RSVP Reader
+# Blitzbee
 
 A speed-reading app built around **RSVP** (Rapid Serial Visual Presentation) with
 **ORP** (Optimal Recognition Point) highlighting. Words are presented one frame at a
@@ -112,9 +112,13 @@ producing an empty document.
 
 ### Storage
 
-Settings go to `localStorage` through Zustand's `persist` middleware — small, and
-readable synchronously on first paint. Documents go to **IndexedDB**: a single EPUB
-easily exceeds the ~5 MB `localStorage` quota. Reading position is written back on a
+Settings go to `localStorage` under `blitzbee-settings`, through Zustand's `persist`
+middleware — small, and readable synchronously on first paint. The theme bootstrap
+script in `layout.tsx` reads that same key directly, so the two must be renamed
+together or the page paints the wrong theme before React mounts.
+
+Documents go to the **IndexedDB** database `blitzbee`: a single EPUB easily exceeds
+the ~5 MB `localStorage` quota. Reading position is written back on a
 1 s debounce, since playback fires a progress event every frame.
 
 The IndexedDB wrapper in `src/lib/storage.ts` is deliberately dependency-free and
