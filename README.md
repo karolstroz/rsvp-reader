@@ -23,18 +23,12 @@ npm run typecheck  # tsc --noEmit
 
 ## Deploying
 
-The app lives in a subdirectory of a documentation repository, so a deploy has to
-be pointed at `rsvp-reader/` rather than the repository root — importing the root
-builds the Mintlify docs site instead and fails.
-
-**Vercel via Git:** import the repository, then set **Root Directory** to
-`rsvp-reader` on the import screen. Next.js is auto-detected; no environment
-variables are required.
+**Vercel via Git:** import this repository. Next.js is auto-detected, the defaults
+are correct, and no environment variables are required.
 
 **Vercel from a terminal:**
 
 ```bash
-cd rsvp-reader
 npx vercel        # preview
 npx vercel --prod # production
 ```
