@@ -161,6 +161,13 @@ export function SettingsPanel({ open, onClose }: SettingsPanelProps) {
           />
 
           <Toggle
+            label="Strip punctuation"
+            description="Hide commas, dashes and quotes attached to a word while it is on screen. Pacing still uses them."
+            checked={settings.stripPunctuation}
+            onChange={(stripPunctuation) => updateSettings({ stripPunctuation })}
+          />
+
+          <Toggle
             label="Bionic reading"
             description="Bold the leading letters of each word in the full-text view."
             checked={settings.bionic}

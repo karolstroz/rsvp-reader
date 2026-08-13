@@ -239,6 +239,7 @@ export function ReaderView() {
             fontSize={settings.fontSize}
             fontFamily={settings.fontFamily}
             showGuides={settings.showGuides}
+            stripPunctuation={settings.stripPunctuation}
           />
         </div>
 
@@ -306,7 +307,7 @@ export function ReaderView() {
             text={document.text}
             bionic={settings.bionic}
             fontFamily={settings.fontFamily}
-            activeToken={player.tokenIndex}
+            activeToken={player.currentChunk?.tokens[0]?.sourceIndex}
           />
         </div>
       )}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { bionicHeadLength, bionicParagraphs, bionicSplit } from '@/lib/bionic';
-import { tokenize } from '@/lib/tokenizer';
+import { splitParagraphs, tokenize } from '@/lib/tokenizer';
 
 describe('bionicHeadLength', () => {
   it('bolds a single letter of short function words', () => {
@@ -39,16 +39,28 @@ describe('bionicSplit', () => {
 });
 
 describe('bionicParagraphs', () => {
-  it('produces one entry per word, aligned with the tokenizer', () => {
-    const text = 'first paragraph here\n\nsecond one follows now';
-    const words = bionicParagraphs(text).flat();
-    expect(words).toHaveLength(tokenize(text).length);
+  it('renders every word in the source, including punctuation-only ones', () => {
+    // The full-text view is ordinary prose and keeps what the RSVP frame drops.
+    const text = 'first \u2014 paragraph here';
+    expect(bionicParagraphs(text).flat()).toHaveLength(splitParagraphs(text).flat().length);
   });
 
-  it('drops empty paragraphs so token indices stay aligned', () => {
-    const text = 'one two\n\n\n\nthree four';
-    expect(bionicParagraphs(text)).toHaveLength(2);
-    expect(bionicParagraphs(text).flat()).toHaveLength(tokenize(text).length);
+  it('drops empty paragraphs', () => {
+    expect(bionicParagraphs('one two\n\n\n\nthree four')).toHaveLength(2);
+  });
+
+  it('stays aligned with sourceIndex, which is how the cursor is mapped onto it', () => {
+    // This is the contract the reader depends on: highlighting token N in the
+    // full-text view means highlighting the word at its sourceIndex.
+    const text = 'alpha \u2014 beta gamma.\n\ndelta';
+    const words = bionicParagraphs(text).flat();
+    const raw = splitParagraphs(text).flat();
+
+    for (const token of tokenize(text)) {
+      const word = words[token.sourceIndex];
+      expect(word.head + word.tail, `token ${token.index}`).toBe(raw[token.sourceIndex]);
+      expect(word.head + word.tail).toBe(token.text);
+    }
   });
 
   it('returns nothing for empty input', () => {

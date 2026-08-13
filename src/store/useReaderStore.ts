@@ -30,6 +30,7 @@ export const DEFAULT_SETTINGS: Settings = {
   fontFamily: 'sans',
   theme: 'dark',
   smartPacing: true,
+  stripPunctuation: true,
   bionic: false,
   showGuides: true,
 };

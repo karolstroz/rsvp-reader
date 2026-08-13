@@ -10,6 +10,8 @@ interface WordDisplayProps {
   fontSize: number;
   fontFamily: FontFamily;
   showGuides: boolean;
+  /** Render words without their surrounding punctuation. */
+  stripPunctuation: boolean;
 }
 
 const FONT_CLASS: Record<FontFamily, string> = {
@@ -30,13 +32,19 @@ const FONT_CLASS: Record<FontFamily, string> = {
  * exactly right for free, which is also why a monospace font is offered but not
  * required.
  */
-export function WordDisplay({ chunk, fontSize, fontFamily, showGuides }: WordDisplayProps) {
-  const split = useMemo(() => {
-    if (!chunk || chunk.tokens.length === 0) return null;
-    return splitChunkOnOrp(chunk.tokens.map((token) => token.text));
-  }, [chunk]);
+export function WordDisplay({
+  chunk,
+  fontSize,
+  fontFamily,
+  showGuides,
+  stripPunctuation,
+}: WordDisplayProps) {
+  const words = useMemo(
+    () => chunk?.tokens.map((token) => (stripPunctuation ? token.display : token.text)) ?? [],
+    [chunk, stripPunctuation],
+  );
 
-  const words = chunk?.tokens.map((token) => token.text).join(' ') ?? '';
+  const split = useMemo(() => (words.length > 0 ? splitChunkOnOrp(words) : null), [words]);
 
   return (
     <div className="relative flex w-full items-center justify-center select-none">
@@ -46,7 +54,7 @@ export function WordDisplay({ chunk, fontSize, fontFamily, showGuides }: WordDis
         users are served by the full-text view instead, which carries the same
         content in a readable, self-paced form.
       */}
-      <span className="sr-only">Current words: {words}</span>
+      <span className="sr-only">Current words: {words.join(' ')}</span>
 
       {showGuides && (
         <>

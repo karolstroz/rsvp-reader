@@ -1,3 +1,5 @@
+import { splitParagraphs } from './tokenizer';
+
 /**
  * Bionic Reading — bold the leading letters of each word so the eye can jump
  * between fixation points in normal, self-paced prose. Used for the full-text
@@ -40,14 +42,10 @@ export function bionicSplit(word: string, intensity = 0.4): BionicWord {
 
 /** Split a whole text into paragraphs of bionic words, for rendering. */
 export function bionicParagraphs(text: string, intensity = 0.4): BionicWord[][] {
-  return text
-    .replace(/\r\n?/g, '\n')
-    .split(/\n\s*\n+/)
-    .map((paragraph) =>
-      paragraph
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((word) => bionicSplit(word, intensity)),
-    )
-    .filter((paragraph) => paragraph.length > 0);
+  // Uses the tokenizer's splitter so the full-text view and the token stream can
+  // never disagree about where a word begins — the RSVP cursor is mapped onto
+  // this rendering by source position.
+  return splitParagraphs(text).map((paragraph) =>
+    paragraph.map((word) => bionicSplit(word, intensity)),
+  );
 }

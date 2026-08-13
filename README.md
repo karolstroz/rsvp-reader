@@ -125,6 +125,38 @@ In a multi-word frame only the *final* word's punctuation applies — an interio
 should not stop a frame the reader is taking in as one unit. Smart pacing can be
 switched off for uniform timing.
 
+### Punctuation — `stripOuterPunctuation`
+
+A trailing comma shifts a word's centre of mass, which is exactly what the ORP
+alignment exists to hold still. So the RSVP frame renders the word without its
+surrounding punctuation, while the pacing engine keeps classifying the pause from
+the original — the comma still buys its beat, it just is not drawn.
+
+Only the outer shell comes off. Inner punctuation is load-bearing and survives:
+
+| Input | Frame shows | Why |
+| ----- | ----------- | --- |
+| `word,` `word.` `word;` `word:` | `word` | outer shell |
+| `„słowo”` `(word)` `"word."` | `słowo` / `word` | outer shell |
+| `don't` `well-known` `and/or` | unchanged | inner, part of the word |
+| `1,200` `3.14` | unchanged | inner, part of the number |
+| `-5` `+3.5` | unchanged | a stripped sign is a *wrong number*, not a tidier one |
+
+Words that are nothing but punctuation — a lone em dash, `...`, a stray bullet —
+are dropped from the stream rather than shown as an empty frame. Spaced em dashes
+are ordinary Polish and English typography, so this is a common case, not an exotic
+one. The dropped word still implies a beat, so its pause is handed to the token
+before it: losing the character must not lose the rhythm.
+
+Dropping words means the token stream is shorter than the source, so each token
+carries a `sourceIndex` alongside its `index`. The full-text view renders *every*
+source word, punctuation intact, and the RSVP cursor is mapped onto it by
+`sourceIndex` — which is why `bionicParagraphs` and `tokenize` share one splitter
+rather than each doing their own.
+
+Switchable off under **Strip punctuation**, for readers who use commas to parse
+sentence structure.
+
 ### Content import
 
 | Source | Where it runs | Library |
@@ -184,7 +216,7 @@ While playback runs the interface fades out (Zen mode) and returns on any input.
 
 Speed 100–1000 WPM in steps of 25 · 1–3 words per frame · text size 24–140 px ·
 sans / serif / mono · dark, light, sepia and high-contrast themes · smart pacing ·
-Bionic Reading in the full-text view · focus guides.
+punctuation stripping · Bionic Reading in the full-text view · focus guides.
 
 Themes are CSS custom properties switched by a `data-theme` attribute on `<html>`,
 applied by an inline script before first paint so there is no flash of the wrong
@@ -200,11 +232,15 @@ theme is available for low-vision use.
 
 ## Tests
 
-53 unit tests cover the reading engine — ORP splitting (including punctuation and
+65 unit tests cover the reading engine — ORP splitting (including punctuation and
 pivot capping), tokenization and chunking, pause classification, pacing multipliers,
-and Bionic Reading splits. The chunker is tested to cover every token exactly once at
-every frame width, and Bionic paragraph splitting is checked to stay index-aligned
-with the tokenizer, since the full-text view maps the RSVP cursor onto it.
+punctuation stripping, and Bionic Reading splits.
+
+Three invariants get their own tests, because breaking them corrupts text silently
+rather than loudly: the chunker covers every token exactly once at every frame width;
+stripping never touches punctuation *inside* a word or number; and the full-text
+rendering stays addressable by `sourceIndex`, which is how the RSVP cursor is mapped
+onto it.
 
 ```bash
 npm test

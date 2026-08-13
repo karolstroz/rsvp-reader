@@ -34,6 +34,8 @@ export interface Settings {
   theme: ThemeName;
   /** Punctuation- and length-aware frame timing. */
   smartPacing: boolean;
+  /** Hide punctuation attached to a word while it is on the RSVP frame. */
+  stripPunctuation: boolean;
   /** Bionic bolding in the full-text view. */
   bionic: boolean;
   /** Show the vertical guide lines around the ORP letter. */
